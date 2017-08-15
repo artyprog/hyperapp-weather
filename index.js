@@ -7,7 +7,21 @@ const html = hyperx(h)
 
 app({
   state: {
-    message: "Hi."
+    count: 0
   },
-  view: state => html `<h1>${state.message}</h1>`
+  view: (state, actions) => html `
+  <main>
+    <h1>${state.count}</h1>
+    <button onclick=${actions.add}>+</button>
+    <button onclick=${actions.sub}>-</button>
+  </main>
+  `,
+  actions: {
+    add: state => ({
+      count: state.count + 1
+    }),
+    sub: state => ({
+      count: state.count - 1
+    })
+  }
 })
