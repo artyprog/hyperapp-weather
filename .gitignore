@@ -4,8 +4,3 @@ npm-debug.log*
 
 /dist
 /node_modules
-/bundle.js
-/common.js
-/index.html
-/main.js
-/vendor.js

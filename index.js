@@ -1,3 +1,6 @@
+require("./w3.css");
+require("./w3.theme.css");
+
 const {
   h,
   app
@@ -10,10 +13,10 @@ app({
     count: 0
   },
   view: (state, actions) => html `
-  <main>
+  <main class="w3-container">
     <h1>${state.count}</h1>
-    <button onclick=${actions.add}>+</button>
-    <button onclick=${actions.sub}>-</button>
+    <button class="w3-button w3-theme" onclick=${actions.add}>+</button>
+    <button class="w3-button w3-theme" onclick=${actions.sub}>-</button>
   </main>
   `,
   actions: {
