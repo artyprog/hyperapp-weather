@@ -2,10 +2,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 module.exports = {
-  entry: "./index.js",
+  entry: './src/index.js',
   output: {
     path: __dirname + '/dist',
-    filename: "bundle.js",
+    filename: 'bundle.js',
   },
   module: {
     rules: [{
@@ -15,7 +15,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader!transform-loader?hyperxify"
+        loader: 'babel-loader!transform-loader?hyperxify'
       }
     ]
   },
