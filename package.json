@@ -4,7 +4,8 @@
   "description": "weather forcast built with hyperapp.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
+    "build": "webpack",
+    "prod": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
