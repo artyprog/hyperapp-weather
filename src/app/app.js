@@ -5,10 +5,19 @@ const {
 const hyperx = require("hyperx")
 const html = hyperx(h)
 
-const City = (getForecast) => html `
-<input class="w3-input w3-border" type="text" placeholder="City..." onkeyup=${getForecast}/>
+/*
+implement functional components vs. components.
+see: https://guide.elm-lang.org/reuse/
+*/
+const City = getForecast => html `
+<input
+  class="w3-input w3-border" type="text" placeholder="City..." onkeyup=${getForecast}/>
 `;
-
+const Button = (action, text) => html `
+<button
+  class="w3-button w3-theme"
+  onclick=${action}>${text}</button>
+`;
 
 app({
   state: {
@@ -22,12 +31,8 @@ app({
       <h1>
         ${state.count}
       </h1>
-      <button
-        class="w3-button w3-theme"
-        onclick=${actions.add}>+</button>
-      <button
-        class="w3-button w3-theme"
-        onclick=${actions.sub}>-</button>
+      ${Button(actions.add, '+')}
+      ${Button(actions.sub, '-')}
     </main>`,
   actions: {
     add: state => ({
