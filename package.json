@@ -14,7 +14,8 @@
   "author": "jdtibbs",
   "license": "ISC",
   "dependencies": {
-    "hyperapp": "^0.11.0"
+    "hyperapp": "^0.11.0",
+    "most": "^1.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
