@@ -22,7 +22,7 @@ const {
 } = require('ramda')
 
 const getForecast = (action, city) => {
-  var q = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="des moines")';
+  var q = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' + city + '")';
 
   get('https://query.yahooapis.com/v1/public/yql', {
       params: {
@@ -55,6 +55,7 @@ const getForecast = (action, city) => {
       console.log(error.config);
     });
 }
+
 /*
 implement functional components vs. components.
 see: https://guide.elm-lang.org/reuse/
@@ -82,7 +83,8 @@ const Button = (action, text) => html `
 app({
   state: {
     city: '',
-    count: 0
+    count: 0,
+    forecast: {}
   },
   view: (state, actions) =>
     html `
@@ -93,6 +95,7 @@ app({
       ${Button(actions.add, '+')}
       ${Button(actions.sub, '-')}
       ${InputDebounced('city','City...',actions.forecast)}
+      <p>${JSON.stringify(state.forecast)}</p>
     </main>`,
   actions: {
     add: state => ({
