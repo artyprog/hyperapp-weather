@@ -186,7 +186,15 @@ const components = {
   Heading: () =>
     html `
       <h3>Weather Forecast<a class="w3-right" href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29"/></a></h3>
-      `
+      `,
+  Location: location =>
+    location ? html `
+      <span>${location.city}, ${location.region} ${location.country}</span>
+      ` : html `<span></span>`,
+  PubDate: pubDate =>
+    pubDate ? html `
+      <span>${pubDate}</span>
+      ` : html `<span></span>`
 };
 const lens = {
   channel: lensPath(['results', 'channel']),
@@ -259,6 +267,20 @@ app({
       <div class="w3-row-padding">
         <div class="w3-col m8 l6">
           ${components.City(actions.forecast, observables.city)}
+        </div>
+      </div>
+      <div class="w3-margin-top w3-row-padding">
+        <div class="w3-col m12 l3">
+          <div class="w3-large">
+            ${components.Location(weather.location(state.forecast))}
+          </div>
+        </div>
+      </div>
+      <div class="w3-margin-top w3-row-padding">
+        <div class="w3-col m12 l3">
+          <div>
+            ${components.PubDate(weather.pubDate(state.forecast))}
+          </div>
         </div>
       </div>
       <div class="w3-margin-top w3-row-padding">
