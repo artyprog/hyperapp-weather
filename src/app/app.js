@@ -134,6 +134,13 @@ const apis = {
   parseLink: parseLink
 };
 const components = {
+  City: (action, observable) =>
+    html `
+    <div>
+      <label class="w3-label" for="city">Location</label>
+      ${Input('city', 'City, State', 800, action, observable)}
+    </div>
+    `,
   Condition: (condition, link) =>
     condition ? html `
       <div class="w3-card" ng-show="condition">
@@ -175,7 +182,11 @@ const components = {
           </table>
         </a>
       </div>
-      ` : html `<span></span>`
+      ` : html `<span></span>`,
+  Heading: () =>
+    html `
+      <h3>Weather Forecast<a class="w3-right" href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29"/></a></h3>
+      `
 };
 const lens = {
   channel: lensPath(['results', 'channel']),
@@ -240,13 +251,14 @@ app({
   view: (state, actions) =>
     html `
     <main class="w3-container">
-      <h1>
-        Weather Forecast
-      </h1>
       <div class="w3-row-padding">
         <div class="w3-col m8 l6">
-          <label class="w3-label" for="city">Location</label>
-          ${Input('city', 'City, State', 800, actions.forecast, observables.city)}
+          ${components.Heading()}
+        </div>
+      </div>
+      <div class="w3-row-padding">
+        <div class="w3-col m8 l6">
+          ${components.City(actions.forecast, observables.city)}
         </div>
       </div>
       <div class="w3-margin-top w3-row-padding">
