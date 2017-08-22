@@ -4,7 +4,7 @@ hyperapp min dependencies
 import {
   h,
   app
-} from "hyperapp";
+} from 'hyperapp';
 /*
 app sepcific dependencies
  */
@@ -39,10 +39,10 @@ const getForecast = (action, city) => {
         env: 'store://datatables.org/alltableswithkeys'
       }
     })
-    .then(function(response) {
+    .then(response => {
       action(response.data)
     })
-    .catch(function(error) {
+    .catch(error => {
       if (error.response) {
         /* The request was made and the server responded with a status code that falls out of the range of 2xx
          */
@@ -81,18 +81,10 @@ const parseLink = link =>
   this is so much more concise in es2015.
   */
   box(link)
-  .map(function(v) {
-    return exists(link) ? link : '';
-  })
-  .map(function(v) {
-    return split('*', v);
-  })
-  .map(function(v) {
-    return v.length > 1 ? v[1] : undefined;
-  })
-  .fold(function(v) {
-    return v;
-  });
+  .map(v => exists(link) ? link : '')
+  .map(v => split('*', v))
+  .map(v => v.length > 1 ? v[1] : undefined)
+  .fold(v => v);
 
 /*
 implement functional components vs. components.
@@ -105,9 +97,7 @@ const Input = (id, placeholder, debounce, action, observable) => {
       .map(e => e.target.value)
       .observe(v => observable(action, v));
   };
-  return <input
-    id={id} class="w3-input w3-border" type="text" placeholder={placeholder ? placeholder : ''}
-    oncreate={keyup}/>
+  return <input id={id} class="w3-input w3-border" type="text" placeholder={placeholder ? placeholder : ''} oncreate={keyup}/>;
 };
 
 const Button = (action, text) =>
@@ -198,36 +188,21 @@ const observables = {
   city: (action, city) => isEmpty(city) ? action({}) : apis.getForecast(action, city)
 };
 const weather = {
-  condition: function(weather) {
-    return view(views.condition, weather);
-  },
-  count: function(weather) {
-    return view(views.count, weather);
-  },
-  description: function(weather) {
-    return view(views.description, weather);
-  },
-  forecast: function(weather) {
-    return view(views.forecast, weather);
-  },
-  link: function(weather) {
-    return apis.parseLink(view(views.link, weather));
-  },
-  location: function(weather) {
-    return view(views.location, weather);
-  },
-  pubDate: function(weather) {
-    return view(views.pubDate, weather);
-  },
-  wind: function(weather) {
-    return view(views.wind, weather);
-  }
+  condition: weather => view(views.condition, weather),
+  count: weather => view(views.count, weather),
+  description: weather => view(views.description, weather),
+  forecast: weather => view(views.forecast, weather),
+  link: weather => apis.parseLink(view(views.link, weather)),
+  location: weather => view(views.location, weather),
+  pubDate: weather => view(views.pubDate, weather),
+  wind: weather => view(views.wind, weather)
 };
 
 const state = {
   city: '',
   forecast: {}
 };
+
 const views = {
   condition: compose(lens.query, lens.channel, lens.item, lens.condition),
   count: compose(lens.query, lens.count),
@@ -238,6 +213,7 @@ const views = {
   pubDate: compose(lens.query, lens.channel, lens.item, lens.pubDate),
   wind: compose(lens.query, lens.channel, lens.wind)
 };
+
 app({
   state: state,
   view: (state, actions) =>
