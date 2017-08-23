@@ -1,5 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+var path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -26,5 +27,9 @@ module.exports = {
       title: 'Weather by Hyperapp'
     }),
     new HtmlWebpackInlineSourcePlugin()
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    modules: [path.resolve(__dirname, "src"), "node_modules"]
+  }
 }
