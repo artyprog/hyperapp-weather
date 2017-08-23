@@ -47,6 +47,7 @@ const state = {
   city: '',
   forecast: {}
 };
+
 const view = (state, actions) =>
   <main class="w3-container">
      <div class="w3-row-padding">

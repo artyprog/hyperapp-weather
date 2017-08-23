@@ -2,6 +2,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 var path = require('path');
 
+// TODO implement CommonsChunkPlugin
 module.exports = {
   entry: './src/index.js',
   output: {

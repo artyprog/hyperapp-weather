@@ -23,7 +23,7 @@ export const Forecast = (forecast, link) =>
             <td>{v.day} {v.date}</td>
             <td>{v.text}</td>
             <td>{v.high}</td>
-            <td>{v.low}</td >
+            <td>{v.low}</td>
           </tr>
         )}
       </table>
