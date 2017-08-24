@@ -28,4 +28,5 @@ export const Forecast = (forecast, link) =>
         )}
       </table>
     </a>
-  </div> : <span></span>
+  </div> :
+  <span></span>

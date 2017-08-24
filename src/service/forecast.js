@@ -23,7 +23,8 @@ const getForecast = (action, city) => {
       }
     })
     .then(response => {
-      action(response.data)
+      console.log(response);
+      action(response.data);
     })
     .catch(error => {
       if (error.response) {
@@ -50,7 +51,6 @@ const getForecast = (action, city) => {
 const parseLink = link =>
   /*
   the link yahoo returns does not work as is so split it and use the end of it.
-  this is so much more concise in es2015.
   */
   box(link)
   .map(v => exists(link) ? link : '')

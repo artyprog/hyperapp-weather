@@ -30,12 +30,9 @@ see: https://guide.elm-lang.org/reuse/
 */
 
 const actions = {
-  forecast: (state, actions, data) => {
-    console.log(data);
-    return {
-      forecast: data
-    }
-  }
+  forecast: (state, actions, data) => ({
+    forecast: data
+  })
 };
 
 const observables = {

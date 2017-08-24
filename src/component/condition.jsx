@@ -16,4 +16,5 @@ export const Condition = (condition, link) =>
         <p>Condition: {condition.text}</p>
       </div>
     </a>
-  </div> : <span></span>
+  </div> :
+  <span></span>
