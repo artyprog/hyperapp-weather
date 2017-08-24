@@ -1,6 +1,8 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+var path = require('path');
 
+// TODO implement CommonsChunkPlugin
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -13,9 +15,9 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.js$/,
+        test: /\.js$|\.jsx$/,
         exclude: /node_modules/,
-        loader: 'babel-loader!transform-loader?hyperxify'
+        loader: 'babel-loader'
       }
     ]
   },
@@ -26,5 +28,9 @@ module.exports = {
       title: 'Weather by Hyperapp'
     }),
     new HtmlWebpackInlineSourcePlugin()
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    modules: [path.resolve(__dirname, "src"), "node_modules"]
+  }
 }
