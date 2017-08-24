@@ -42,7 +42,8 @@ const getForecast = (action, city) => {
       }
     })
     .then(function(response) {
-      action(response.data)
+      console.log(response);
+      action(response.data);
     })
     .catch(function(error) {
       if (error.response) {
@@ -100,12 +101,13 @@ const parseLink = link =>
 implement functional components vs. components.
 see: https://guide.elm-lang.org/reuse/
 */
-const Input = (id, placeholder, debounce, action, observable) => {
+
+const Input = (id, observable, placeholder = '', debounce = 500) => {
   const keyup = e => {
     fromEvent('keyup', document.getElementById(e.id))
       .debounce(debounce)
       .map(e => e.target.value)
-      .observe(v => observable(action, v));
+      .observe(v => observable(v));
   };
   return html `
   <input
@@ -120,25 +122,23 @@ const Button = (action, text) => html `
   onclick=${action}>${text}</button>
 `;
 
-
 const actions = {
-  forecast: (state, actions, data) => {
-    console.log(data);
-    return {
-      forecast: data
-    }
-  }
+  forecast: (state, actions, data) => ({
+    forecast: data
+  })
 };
+
 const apis = {
   getForecast: getForecast,
   parseLink: parseLink
 };
+
 const components = {
-  City: (action, observable) =>
+  City: (observable) =>
     html `
     <div>
       <label class="w3-label" for="city">Location</label>
-      ${Input('city', 'City, State', 800, action, observable)}
+      ${Input('city', observable, 'City, State', 800)}
     </div>
     `,
   Condition: (condition, link) =>
@@ -211,8 +211,9 @@ const lens = {
 };
 
 const observables = {
-  city: (action, city) => isEmpty(city) ? action({}) : apis.getForecast(action, city)
+  city: (state, action) => city => isEmpty(city) ? action.forecast({}) : apis.getForecast(action.forecast, city)
 };
+
 const weather = {
   condition: function(weather) {
     return view(views.condition, weather);
@@ -266,7 +267,7 @@ app({
       </div>
       <div class="w3-row-padding">
         <div class="w3-col m8 l6">
-          ${components.City(actions.forecast, observables.city)}
+          ${components.City(observables.city(state, actions))}
         </div>
       </div>
       <div class="w3-margin-top w3-row-padding">
