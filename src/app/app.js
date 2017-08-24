@@ -111,16 +111,10 @@ const Input = (id, observable, placeholder = '', debounce = 500) => {
   };
   return html `
   <input
-    id=${id} class="w3-input w3-border" type="text" placeholder=${placeholder ? placeholder : ''}
+    id=${id} class="w3-input w3-border" type="text" placeholder=${placeholder}
     oncreate=${keyup}/>
 `
 };
-
-const Button = (action, text) => html `
-<button
-  class="w3-button w3-theme"
-  onclick=${action}>${text}</button>
-`;
 
 const actions = {
   forecast: (state, actions, data) => ({
