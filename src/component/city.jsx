@@ -7,8 +7,8 @@ import {
   Input
 } from './input.jsx';
 
-export const City = (action, observable) =>
+export const City = (observable) =>
   <div>
       <label class="w3-label" for="city">Location</label>
-      {Input('city', 'City, State', 800, action, observable)}
+      {Input('city', observable, 'City, State', 800 )}
   </div>

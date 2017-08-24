@@ -38,9 +38,8 @@ const actions = {
   }
 };
 
-// TODO curry getForecast.
 const observables = {
-  city: (action, city) => exists(city) ? getForecast(action, city) : action({})
+  city: (state, actions) => city => exists(city) ? getForecast(actions.forecast, city) : actions.forecast({})
 };
 
 const state = {
@@ -57,7 +56,7 @@ const view = (state, actions) =>
      </div>
      <div class="w3-row-padding">
        <div class="w3-col m8 l6">
-         {City(actions.forecast, observables.city)}
+         {City(observables.city(state, actions))}
        </div>
      </div>
      <div class="w3-margin-top w3-row-padding">
@@ -87,7 +86,7 @@ const view = (state, actions) =>
    </main>;
 
 app({
+  actions: actions,
   state: state,
-  view: view,
-  actions: actions
+  view: view
 });
