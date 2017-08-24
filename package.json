@@ -4,9 +4,11 @@
   "description": "weather forcast built with hyperapp.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --display-error-details",
     "prod": "webpack -p",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress --watch"
   },
   "keywords": [
     "hyperapp"
@@ -30,6 +32,7 @@
     "hyperxify": "^2.0.1",
     "style-loader": "^0.18.2",
     "transform-loader": "^0.2.4",
-    "webpack": "^3.5.4"
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
   }
 }
