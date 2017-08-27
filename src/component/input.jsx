@@ -16,5 +16,5 @@ export const Input = (id, observable, placeholder = '', debounce = 500) => {
       .map(e => e.target.value)
       .observe(v => observable(v));
   };
-  return <input id={id} class="w3-input w3-border" type="text" placeholder={placeholder ? placeholder : ''} oncreate={keyup}/>;
+  return <input id={id} class="w3-input w3-border" type="text" placeholder={placeholder} oncreate={keyup}/>;
 };
