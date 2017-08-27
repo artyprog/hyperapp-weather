@@ -36,7 +36,7 @@ const actions = {
 };
 
 const observables = {
-  city: (state, actions) => city => exists(city) ? getForecast(actions.forecast, city) : actions.forecast({})
+  city: actions => city => exists(city) ? getForecast(actions.forecast, city) : actions.forecast({})
 };
 
 const state = {
@@ -53,7 +53,7 @@ const view = (state, actions) =>
      </div>
      <div class="w3-row-padding">
        <div class="w3-col m8 l6">
-         {City(observables.city(state, actions))}
+         {City(observables.city(actions))}
        </div>
      </div>
      <div class="w3-margin-top w3-row-padding">
